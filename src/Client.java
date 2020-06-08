@@ -3,17 +3,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 
-/**
- * A client for a multi-player tic tac toe game. Loosely based on an example in
- * Deitel and Deitel’s “Java How to Program” book. For this project I created a
- * new application-level protocol called TTTP (for Tic Tac Toe Protocol), which
- * is entirely plain text. The messages of TTTP are:
- * <p>
- * Client -> Server MOVE <n> QUIT
- * <p>
- * Server -> Client WELCOME <char> VALID_MOVE OTHER_PLAYER_MOVED <n>
- * OTHER_PLAYER_LEFT VICTORY DEFEAT TIE MESSAGE <text>
- */
 public class Client {
 
     private Socket socket;
@@ -26,15 +15,12 @@ public class Client {
         out = new PrintWriter(socket.getOutputStream(), true);
     }
 
-    /**
-     * The main thread of the client will listen for messages from the server. The
-     * first message will be a "WELCOME" message in which we receive our mark. Then
-     * we go into a loop listening for any of the other messages, and handling each
-     * message appropriately. The "VICTORY", "DEFEAT", "TIE", and
-     * "OTHER_PLAYER_LEFT" messages will ask the user whether or not to play another
-     * game. If the answer is no, the loop is exited and the server is sent a "QUIT"
-     * message.
-     */
+/* NOTKA: Patryku, w tej chwili wszystkie te funkcje które byłyby wołane z poziomu tej pętli w poniższej metodzie istnieją
+    w którejś z tych plansz. Jeszcze trzeba pozmieniać co nieco (np. potem upiększyć kod, zmienić niektóre public na private, te co się da...)
+    nie ma funkcji która by przetwarzała kliknięcie użytkownika na jakiś strzał, najlepiej żeby zwracała właśnie stringa w stylu "Shoot 01"
+    co oznaczałoby strzał w rząd 1 kolumnę B
+    UWAGA WAŻNA RZECZ. GENERALNIE NUMERACJA MOJA JEST JAVOWA TZN. table[1][2] oznacza PIERWSZY RZĄD I DRUGĄ KOLUMNĘ. W STATKACH SIĘ MÓWI ODWROTNIE
+    np strzelam w A3, ale tutaj używajmy tej Javowej proszę, bo tak jest w funkcjach :) */
     public void playListen() throws Exception {
         try {
             var response = in.nextLine();
@@ -42,47 +28,48 @@ public class Client {
             while (in.hasNextLine()) {
                 response = in.nextLine();
                 System.out.println(response);
+
                 if (response.startsWith("WINNER")) {
                     //displayWinnerWindow (czy jakkolwiek tam sygnalizujemy wygraną...)
                     break;
                 }
                 if (response.startsWith("SHOOT X Y")) {
                     //parseTheCoordinatesFromResponse
-                    /*if (isHit()){
-                        colorTheCellAsHitOnMotherboard
-                        if(isSank()){
-                            colorTheWholeShipAsSankOnMotherboard
-                            out.println("SANK")
-                        }
-                        else if (isTheGameOver()){
-                            //displayLoserWindow
-                            //out.println("WINNER");
-                            break;
-                        else{
-                            out.println("HIT")
-                        }
+                    /*if (allShipsAreSunk){
+                    out.println("WINNER")
+                    displayLoserWindow
+                    break;
                     }
-                    else{
-                        colorTheCellAsMissedOnMotherboard
-                        out.println("MISSED")
-                     */
-
+                    int result=isHit();
+                    if (result==0){
+                    zamaluj w GUI jako pudlo (stan juz jest zmieniony po funkcji isHit(), moze potrzeba jakiejs tylko funkcji odswiezajacej? :D )
+                    out.println("MISSED");
+                    }
+                    if (result==1){
+                    zamaluj w gui jako zatopiony (stan juz jest zmieniony po funkcji isHit(), moze potrzeba jakiejs tylko funkcji odswiezajacej? :D )
+                    out.println("SANK");
+                    }
+                    if (result==2){
+                    zamaluj w gui jako trafione pole (stan juz jest zmieniony po funkcji isHit(), moze potrzeba jakiejs tylko funkcji odswiezajacej? :D )
+                    out.println("HIT")
+                    }
+                        */
                 }
                 if (response.startsWith("YOUR TURN")) {
                     //unblockButtons (mam na mysli pola)
-                    //askThePlayerForNextShot
+                    //askThePlayerForNextShot (to z klawiatury zapewne leci)
                     //out.println("SHOOT XY"), gdzie X to litera Y to nr
                     //mozliwe ze out.println("SHOOT XY") będzie w jakimś listenerze do klików myszy...
                     //blockButtons
                 }
                 if (response.startsWith("MISSED")) {
-                    //displayMissed
-                    //colorTheMissedCellOnEnemyBoard
+                    //displayMissed (to GUI znowu jakies okienko)
+                    //ustaw pozycje ostatnio strzelonego jako nietrafiona (na planszy enemyboard)
                     //out.println("YOUR TURN")
                 }
                 if (response.startsWith("HIT") || response.startsWith("SANK")) {
-                    //displayThatWeHaveHit
-                    //colorTheHitCellOnEnemyBoard
+                    //displayThatWeHaveHit (cos do wypisania w glownym oknie)
+                    //colorTheHitCellOnEnemyBoard (znowu mamy tutaj funkcje juz do ustalenia ostatniej pozycji jako nietrafiona)
                     //unblockButtons
                     //askForNextShot
                     //out.println("SHOOT XY"), gdzie X to litera Y to nr
@@ -90,8 +77,8 @@ public class Client {
                     //blockButtons
                 }
                 if (response.startsWith("LEFT")) {
-                    //displayThatOpponentHasLeft
-                    //displayWinnerWindow
+                    //displayThatOpponentHasLeft (tez jakies okienko)
+                    //displayWinnerWindow (te dwa moga byc razem albo cos, whatever)
                     break;
                 }
             }
@@ -107,6 +94,5 @@ public class Client {
     public static void main(String[] args) throws Exception {
         Client client = new Client("localhost");
         client.playListen();
-
     }
 }
