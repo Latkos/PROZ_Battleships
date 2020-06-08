@@ -21,7 +21,7 @@ public class Client {
     private PrintWriter out;
 
     public Client(String serverAddress) throws Exception {
-        socket = new Socket(serverAddress, 58301);
+        socket = new Socket(serverAddress, 58302);
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -42,12 +42,60 @@ public class Client {
             while (in.hasNextLine()) {
                 response = in.nextLine();
                 System.out.println(response);
-                out.println("PLAYER mowi hejo");
-                if (response.startsWith("QUIT")) {
+                if (response.startsWith("WINNER")) {
+                    //displayWinnerWindow (czy jakkolwiek tam sygnalizujemy wygraną...)
+                    break;
+                }
+                if (response.startsWith("SHOOT X Y")) {
+                    //parseTheCoordinatesFromResponse
+                    /*if (isHit()){
+                        colorTheCellAsHitOnMotherboard
+                        if(isSank()){
+                            colorTheWholeShipAsSankOnMotherboard
+                            out.println("SANK")
+                        }
+                        else if (isTheGameOver()){
+                            //displayLoserWindow
+                            //out.println("WINNER");
+                            break;
+                        else{
+                            out.println("HIT")
+                        }
+                    }
+                    else{
+                        colorTheCellAsMissedOnMotherboard
+                        out.println("MISSED")
+                     */
+
+                }
+                if (response.startsWith("YOUR TURN")) {
+                    //unblockButtons (mam na mysli pola)
+                    //askThePlayerForNextShot
+                    //out.println("SHOOT XY"), gdzie X to litera Y to nr
+                    //mozliwe ze out.println("SHOOT XY") będzie w jakimś listenerze do klików myszy...
+                    //blockButtons
+                }
+                if (response.startsWith("MISSED")) {
+                    //displayMissed
+                    //colorTheMissedCellOnEnemyBoard
+                    //out.println("YOUR TURN")
+                }
+                if (response.startsWith("HIT") || response.startsWith("SANK")) {
+                    //displayThatWeHaveHit
+                    //colorTheHitCellOnEnemyBoard
+                    //unblockButtons
+                    //askForNextShot
+                    //out.println("SHOOT XY"), gdzie X to litera Y to nr
+                    //mozliwe ze out.println("SHOOT XY") będzie w jakimś listenerze do klików myszy...
+                    //blockButtons
+                }
+                if (response.startsWith("LEFT")) {
+                    //displayThatOpponentHasLeft
+                    //displayWinnerWindow
                     break;
                 }
             }
-            out.println("QUIT");
+            out.println("LEFT");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

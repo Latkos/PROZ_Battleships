@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 
@@ -11,16 +10,16 @@ import java.util.concurrent.Executors;
  * Deitel and Deitel’s “Java How to Program” book. For this project I created a
  * new application-level protocol called TTTP (for Tic Tac Toe Protocol), which
  * is entirely plain text. The messages of TTTP are:
- *
+ * <p>
  * Client -> Server MOVE <n> QUIT
- *
+ * <p>
  * Server -> Client WELCOME <char> VALID_MOVE OTHER_PLAYER_MOVED <n>
  * OTHER_PLAYER_LEFT VICTORY DEFEAT TIE MESSAGE <text>
  */
 public class Server {
 
     public static void main(String[] args) throws Exception {
-        try (var listener = new ServerSocket(58301)) {
+        try (var listener = new ServerSocket(58302)) {
             System.out.println("Tic Tac Toe Server is Running...");
             var pool = Executors.newFixedThreadPool(2);
             while (true) {
@@ -51,14 +50,14 @@ class Game {
 
         public Player(Socket socket, int number) {
             this.socket = socket;
-            this.number=number;
+            this.number = number;
         }
 
         @Override
         public void run() {
             try {
                 setup();
-                processCommands();
+                processPlayerCommands();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -77,7 +76,7 @@ class Game {
             input = new Scanner(socket.getInputStream());
             output = new PrintWriter(socket.getOutputStream(), true);
             output.println("WELCOME " + number);
-            if (number ==1) {
+            if (number == 1) {
                 currentPlayer = this;
                 System.out.println("MESSAGE Waiting for opponent to connect");
                 output.println("MESSAGE Waiting for opponent to connect");
@@ -88,14 +87,13 @@ class Game {
             }
         }
 
-        private void processCommands() {
+        private void processPlayerCommands() {
             while (input.hasNextLine()) {
                 var command = input.nextLine();
-                if (command.startsWith("QUIT")) {
-                    return;
-                } else {
-                    System.out.println(command);
-                }
+                    //tutaj np. do zapisu przebiegu gry w JSONie bedzie mozna te wiadomosci odpowiednio przetwarzac
+                    //ale na razie ten serwer to jest bardziej taki przekaznik
+                    // no i jakis warunek konczacy by sie przydalo dodac
+                opponent.output.println(command);
             }
         }
 
