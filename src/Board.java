@@ -12,6 +12,7 @@ public class Board {
     private void assignCoordinatesToCells() {
         for (int a = 0; a < 10; a++) {
             for (int b = 0; b < 10; b++) {
+                board[a][b]=new Cell();
                 board[a][b].setX(a);
                 board[a][b].setY(b);
             }

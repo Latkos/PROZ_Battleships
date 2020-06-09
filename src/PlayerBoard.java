@@ -5,8 +5,9 @@ public class PlayerBoard extends Board {
 
     public boolean allShipsAreSunk() {
         for (int a = 0; a < 4; a++) {
-            if (shipCounter[a] != 0)
+            if (shipCounter[a] != 0) {
                 return false;
+            }
         }
         return true;
     }
@@ -22,9 +23,9 @@ public class PlayerBoard extends Board {
         if (ship.getCellsLeft() == 0) { //we just sank a shit
             shipCounter[ship.getLength() - 1]--;
             sinkAllShipCells(ship);
-            return 1;
+            return 2;
         }
-        return 2; //hit but not sank
+        return 1; //hit but not sank
     }
 
     public boolean placeShip(Ship ship) {
@@ -46,22 +47,22 @@ public class PlayerBoard extends Board {
         }
     }
 
-    boolean changeCellStatesToShip(Ship ship) {
+    private boolean changeCellStatesToShip(Ship ship) {
         int startX = ship.beginning.getX();
         int startY = ship.beginning.getY();
-        int endX = ship.end.getX();
-        int endY = ship.end.getY();
+        int length=ship.getLength();
         if (ship.isVertical()) {
-            for (int a = startX; a < endX; a++)
+            for (int a = startX; a <startX+length; a++)
                 if (board[a][startY].getState() == EnumCellStates.PROHIBITED) return false;
-            for (int a = startX; a < endX; a++) {
+            for (int a = startX; a <startX+length; a++) {
+                System.out.println(a);
                 board[a][startY].setState(EnumCellStates.SHIP);
                 board[a][startY].setAlignedShip(ship);
             }
         } else {
-            for (int a = startY; a < endY; a++)
+            for (int a = startY; a <startY+length; a++)
                 if (board[startX][a].getState() == EnumCellStates.PROHIBITED) return false;
-            for (int a = startY; a < endY; a++) {
+            for (int a = startY; a <startY+length; a++) {
                 board[startX][a].setState(EnumCellStates.SHIP);
                 board[startX][a].setAlignedShip(ship);
             }
@@ -69,7 +70,7 @@ public class PlayerBoard extends Board {
         return true;
     }
 
-    void changeAllProhibitedCellsToBlank() {
+    public void changeAllProhibitedCellsToBlank() {
         for (int a = 0; a < 10; a++) {
             for (int b = 0; b < 10; b++) {
                 if (board[a][b].getState() == EnumCellStates.PROHIBITED) {
@@ -89,7 +90,7 @@ public class PlayerBoard extends Board {
         }
     }
 
-    void checkAndUpdateSurroundingCells(Cell cell) {
+    private void checkAndUpdateSurroundingCells(Cell cell) {
         int x = cell.getX();
         int y = cell.getY();
         for (int a = x - 1; a <= x + 1; a++) {
@@ -99,8 +100,8 @@ public class PlayerBoard extends Board {
         }
     }
 
-    void prohibitCell(int x, int y) {
-        if (x != 0 && x != 10 && y != 0 && y != 10)
+    private void prohibitCell(int x, int y) {
+        if (x >= 0 && x <= 9 && y >= 0 && y <= 9)
             if (board[x][y].getState() == EnumCellStates.BLANK) board[x][y].setState(EnumCellStates.PROHIBITED);
     }
 }

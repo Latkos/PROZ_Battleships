@@ -1,28 +1,22 @@
-import java.awt.*;
-import java.util.ArrayList;
-
 public class Ship {
 
     private boolean isPlaced = false;
     public Cell beginning; //mozliwe ze potem zmienie to public, zobaczymy
-    public Cell end;
+    private int length;
+    private boolean isVertical;
+    int cellsLeft;
+
     public int getLength() {
         return length;
     }
-
-    private int length;
-    private boolean isVertical;
 
     public int getCellsLeft() {
         return cellsLeft;
     }
 
-    public int decrementCellsLeft(){
+    public void decrementCellsLeft() {
         cellsLeft--;
-        return cellsLeft;
     }
-
-    int cellsLeft;
 
     public boolean isVertical() {
         return isVertical;
@@ -32,21 +26,16 @@ public class Ship {
         isPlaced = placed;
     }
 
-    public void setVerticalityAndAdjustEnd(boolean vertical) {
-        isVertical = vertical;
-        if (isVertical) {
-            end.setX(beginning.getX() + length - 1);
-            end.setY(beginning.getY());
-        } else {
-            end.setX(beginning.getX());
-            end.setY(beginning.getY() + length - 1);
-        }
+    public void setVertical(boolean vertical){
+        if (!isPlaced)
+            this.isVertical=vertical;
     }
 
     public Ship(Cell beginning, int length) {
         this.beginning = beginning;
-        this.length = length;
-        setVerticalityAndAdjustEnd(true);
+        this.length=length;
+        this.isVertical=true;
         cellsLeft=length;
     }
+
 }
