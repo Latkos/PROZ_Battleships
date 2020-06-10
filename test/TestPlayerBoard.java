@@ -20,7 +20,7 @@ public class TestPlayerBoard {
     @Test
     void should_ReturnTrue_WhenShipSuccessfullyPlaced() {
         PlayerBoard testPlayerBoard = new PlayerBoard();
-        Ship testShip = new Ship(testPlayerBoard.board[0][0],4);
+        Ship testShip = new Ship(testPlayerBoard.board[0][0], 4);
         testPlayerBoard.placeShip(testShip);
     }
 
