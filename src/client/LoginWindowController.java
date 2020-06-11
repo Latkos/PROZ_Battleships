@@ -1,4 +1,4 @@
-package clientGUI;
+package client;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

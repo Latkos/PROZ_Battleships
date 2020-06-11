@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ClientWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ClientWindowController">
    <right>
       <Pane prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #27496d; -fx-border-color: #00909e;" BorderPane.alignment="CENTER">
          <children>
@@ -20,12 +20,21 @@
             <Pane layoutY="150.0" prefHeight="116.0" prefWidth="200.0" style="-fx-background-color: #142850;">
                <children>
                   <Button layoutX="11.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Rozłącz" />
+                  <Text fill="#dae1e7" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ty vs Wróg" textAlignment="CENTER" wrappingWidth="200.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Text>
                </children></Pane>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                <image>
                   <Image url="@1486722.jpg" />
                </image>
             </ImageView>
+            <Text fill="#dae1e7" layoutX="24.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jednomasztowce:" />
+            <Text fill="#dae1e7" layoutX="23.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dwumasztowce:" />
+            <Text fill="#dae1e7" layoutX="24.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trzymasztowce:" />
+            <Text fill="#dae1e7" layoutX="24.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Czteromasztowce:" />
          </children>
       </Pane>
    </right>
@@ -241,106 +250,106 @@
                         </Text>
                      </children>
                   </Pane>
-                  <Pane fx:id="field_pA1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pA2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pA3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pA4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pA5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pA6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pA7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pA8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pA9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pA10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pB10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pC10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pD10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pE10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pF10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pG10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pH10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pI10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pJ10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="10" />
-                  <Pane fx:id="field_pB9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pC9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pD9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pE9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pF9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pG9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pH9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pI9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pJ9" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="9" />
-                  <Pane fx:id="field_pB8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pB7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pB6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pB5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pB4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pB3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pB2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pB1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pC1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pD1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pE1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pF1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pG1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pH1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pI1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pJ1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-                  <Pane fx:id="field_pJ2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pJ3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pJ4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pJ5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pJ6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pJ7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pJ8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pI8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pI7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pI6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pI5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pI4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pI3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pI2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pH2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pH3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pH4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pH5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pH6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pH7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pH8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pG8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pG7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pG6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pG5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pG4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pG3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pG2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pF2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pF3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pF4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pF5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pF6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pF7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pF8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pE8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pE7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pE6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pE5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pE4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pE3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pE2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pD2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pC2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Pane fx:id="field_pC3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pD3" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Pane fx:id="field_pC4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pD4" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <Pane fx:id="field_pC5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pC6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pC8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pD8" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                  <Pane fx:id="field_pD7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <Pane fx:id="field_pD6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                  <Pane fx:id="field_pD5" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <Pane fx:id="field_pC7" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pA1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pA2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pA3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pA4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pA5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pA6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pA7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pA8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pA9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pA10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pB10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pC10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pD10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pE10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pF10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pG10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pH10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pI10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pJ10" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="10" />
+                  <Pane fx:id="field_pB9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pC9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pD9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pE9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pF9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pG9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pH9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pI9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pJ9" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                  <Pane fx:id="field_pB8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pB7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pB6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pB5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pB4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pB3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pB2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pB1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pC1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pD1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pE1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pF1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pG1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pH1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pI1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pJ1" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                  <Pane fx:id="field_pJ2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pJ3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pJ4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pJ5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pJ6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pJ7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pJ8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pI8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pI7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pI6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pI5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pI4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pI3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pI2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pH2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pH3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pH4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pH5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pH6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pH7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pH8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pG8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pG7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pG6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pG5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pG4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pG3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pG2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pF2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pF3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pF4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pF5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pF6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pF7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pF8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pE8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pE7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pE6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pE5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pE4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pE3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pE2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pD2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pC2" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Pane fx:id="field_pC3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pD3" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Pane fx:id="field_pC4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pD4" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Pane fx:id="field_pC5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pC6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pC8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pD8" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <Pane fx:id="field_pD7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <Pane fx:id="field_pD6" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <Pane fx:id="field_pD5" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Pane fx:id="field_pC7" onMouseClicked="#gridMouseAction" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #00909e;" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </left>
@@ -373,6 +382,26 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
+                  <RadioButton fx:id="verticallyOption" layoutX="810.0" layoutY="57.0" mnemonicParsing="false" selected="true" text="Pionowo" textFill="#dae1e7">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="PositionRadioButtons" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="horizontallyOption" layoutX="810.0" layoutY="96.0" mnemonicParsing="false" text="Poziomo" textFill="#dae1e7" toggleGroup="$PositionRadioButtons" />
+                  <Text fill="#dae1e7" layoutX="810.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pozycja" />
+                  <Text fill="#dae1e7" layoutX="10.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jednomasztowce:" />
+                  <Text fill="#dae1e7" layoutX="216.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trzymasztowce:" />
+                  <Text fill="#dae1e7" layoutX="10.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dwumasztowce:" />
+                  <Text fill="#dae1e7" layoutX="216.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Czteromasztowce:" />
+                  <Text fx:id="singleMasterShipsAmountText" fill="#dae1e7" layoutX="147.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0/4" />
+                  <Text fx:id="twoMasterShipsAmountText" fill="#dae1e7" layoutX="147.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0/3" />
+                  <Text fx:id="threeMasterShipsAmountText" fill="#dae1e7" layoutX="362.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0/2" />
+                  <Text fx:id="fourMasterShipsAmountText" fill="#dae1e7" layoutX="362.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0/1" />
+                  <Text fill="#dae1e7" layoutX="500.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ustaw:" />
+                  <Button fx:id="fourMasterChoiceButton" layoutX="648.0" layoutY="91.0" mnemonicParsing="false" onMouseClicked="#choiceButtonsAction" prefHeight="25.0" prefWidth="137.0" text="Czteromasztowiec" />
+                  <Button fx:id="threeMasterChoiceButton" layoutX="648.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#choiceButtonsAction" prefHeight="25.0" prefWidth="137.0" text="Trójmasztowiec" />
+                  <Button fx:id="twoMasterChoiceButton" layoutX="500.0" layoutY="91.0" mnemonicParsing="false" onMouseClicked="#choiceButtonsAction" prefHeight="25.0" prefWidth="137.0" text="Dwumasztowiec" />
+                  <Button fx:id="singleMastedChoiceButton" layoutX="500.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#choiceButtonsAction" prefHeight="25.0" prefWidth="137.0" text="Jednomasztowiec" />
+                  <Text fx:id="chosenShipTypeText" fill="#dae1e7" layoutX="598.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="187.0" />
                </children></Pane>
          </bottom>
          <right>

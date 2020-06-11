@@ -1,3 +1,5 @@
+package client;
+
 enum EnumCellStates {
     BLANK,
     SHIP,

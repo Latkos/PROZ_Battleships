@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+package client;
 
 public class PlayerBoard extends Board {
-    //ArrayList<Ship> shipList = new ArrayList<Ship>();
+    //ArrayList<client.Ship> shipList = new ArrayList<client.Ship>();
 
     public boolean allShipsAreSunk() {
         for (int a = 0; a < 4; a++) {

@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+package client;
 
 public class Board {
-    public Cell[][] board; //to chyba powinno byc public
-    public int[] shipCounter;
+    public Cell[][] board; //to chyba powinno byc public #nope w Javie trzeba starac sie, zeby wszystko bylo hermetyczne, a wiec konieczne sa funkcje do obslugie tego i zamiana na private
+    public int[] shipCounter; 
     public Board() {
         board = new Cell[10][10];
         assignCoordinatesToCells();
