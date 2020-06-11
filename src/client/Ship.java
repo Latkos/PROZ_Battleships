@@ -28,13 +28,22 @@ public class Ship {
         isPlaced = placed;
     }
 
+    public boolean isPlaced()
+    {
+        return isPlaced;
+    }
+
     public void setVertical(boolean vertical){
         if (!isPlaced)
             this.isVertical=vertical;
     }
 
-    public Ship(Cell beginning, int length) {
+    public void setBeginning(Cell beginning)
+    {
         this.beginning = beginning;
+    }
+
+    public Ship(int length) {
         this.length=length;
         this.isVertical=true;
         cellsLeft=length;

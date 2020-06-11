@@ -1,7 +1,9 @@
 package client;
 
+import java.util.ArrayList;
+
 public class PlayerBoard extends Board {
-    //ArrayList<client.Ship> shipList = new ArrayList<client.Ship>();
+    ArrayList<Ship> shipList;
 
     public boolean allShipsAreSunk() {
         for (int a = 0; a < 4; a++) {
@@ -28,12 +30,31 @@ public class PlayerBoard extends Board {
         return 1; //hit but not sank
     }
 
-    public boolean placeShip(Ship ship) {
-        if (!changeCellStatesToShip(ship)) return false;
+    private Ship getShipToPlace(int length)
+    {
+        for (Ship ship : shipList) {
+            if (!ship.isPlaced() && ship.getLength() == length) {
+                return ship;
+            }
+        }
+        return null;
+    }
+
+    public boolean placeShip(int length, int x, int y, boolean isVertical) { //x -> column, y -> row
+        Ship ship = getShipToPlace(length);
+
+        if(ship == null) //przypadek, gdyby funkcja nie zwrocila zadnego statku
+            return false;
+
+        if (!changeCellStatesToShip(ship, x, y, isVertical)) return false;
         updateProhibitedFields();
+        for(int a = 0; a < 10; a++)
+        {
+            for(int b = 0; b < 10; b++)
+                System.out.print(board[a][b].getState() + " ");
+            System.out.println();
+        }
         ship.setPlaced(true);
-        //it is probably useless
-        //shipList.add(ship);
         shipCounter[ship.getLength() - 1]++;
         return true;
     }
@@ -47,26 +68,38 @@ public class PlayerBoard extends Board {
         }
     }
 
-    private boolean changeCellStatesToShip(Ship ship) {
-        int startX = ship.beginning.getX();
-        int startY = ship.beginning.getY();
-        int length=ship.getLength();
-        if (ship.isVertical()) {
-            for (int a = startX; a <startX+length; a++)
-                if (board[a][startY].getState() == EnumCellStates.PROHIBITED) return false;
-            for (int a = startX; a <startX+length; a++) {
-                System.out.println(a);
-                board[a][startY].setState(EnumCellStates.SHIP);
-                board[a][startY].setAlignedShip(ship);
-            }
-        } else {
-            for (int a = startY; a <startY+length; a++)
-                if (board[startX][a].getState() == EnumCellStates.PROHIBITED) return false;
-            for (int a = startY; a <startY+length; a++) {
-                board[startX][a].setState(EnumCellStates.SHIP);
-                board[startX][a].setAlignedShip(ship);
+    private boolean changeCellStatesToShip(Ship ship, int x, int y, boolean isVertical) {
+        //int startX = ship.beginning.getX();
+        //int startY = ship.beginning.getY();
+        int length = ship.getLength();
+        ship.setVertical(isVertical);
+        if (isVertical) {
+            System.out.println("cosik");
+            for (int a = y; a < y + length; a++)
+                if (a > 9 || board[x][a].getState() != EnumCellStates.BLANK)
+                    return false;
+
+            for (int a = y; a < y + length; a++) {
+                //System.out.println(a);
+                board[x][a].setState(EnumCellStates.SHIP);
+                board[x][a].setAlignedShip(ship);
             }
         }
+        else
+        {
+            for (int a = x; a < x + length; a++)
+            {
+                if (a > 9 || board[a][y].getState() != EnumCellStates.BLANK)
+                    return false;
+            }
+
+            for (int a = x; a < x+length; a++) {
+                board[a][y].setState(EnumCellStates.SHIP);
+                board[a][y].setAlignedShip(ship);
+            }
+        }
+        ship.setBeginning(board[x][y]);
+
         return true;
     }
 
@@ -103,5 +136,36 @@ public class PlayerBoard extends Board {
     private void prohibitCell(int x, int y) {
         if (x >= 0 && x <= 9 && y >= 0 && y <= 9)
             if (board[x][y].getState() == EnumCellStates.BLANK) board[x][y].setState(EnumCellStates.PROHIBITED);
+    }
+
+    /*
+    i = 0 -> single-masted
+    i = 1 -> two-masted
+    i = 2 -> three-masted
+    i = 3 -> four-masted
+ */
+    public int getAmountShipsOfType(int i)
+    {
+        return shipCounter[i];
+    }
+
+    public EnumCellStates getCellState(int x, int y)
+    {
+        return board[x][y].getState();
+    }
+    public PlayerBoard()
+    {
+        super();
+        shipList = new ArrayList<>();
+        for(int i = 0; i < 4; i++)
+        {
+            shipList.add(new Ship(1));
+            if(i < 3)
+                shipList.add(new Ship(2));
+            if(i < 2)
+                shipList.add(new Ship(3));
+            if(i == 0)
+                shipList.add(new Ship(4));
+        }
     }
 }

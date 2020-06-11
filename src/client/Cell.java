@@ -2,7 +2,7 @@ package client;
 
 public class Cell {
 
-    private EnumCellStates state = EnumCellStates.BLANK;
+    private EnumCellStates state;
     private int x;
     private int y;
     private Ship alignedShip;
@@ -40,6 +40,11 @@ public class Cell {
         this.y = y;
     }
 
-
+    public Cell(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+        state = EnumCellStates.BLANK;
+    }
 
 }

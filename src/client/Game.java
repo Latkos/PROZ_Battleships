@@ -15,13 +15,18 @@ public class Game
         enemyBoard = new EnemyBoard();
     }
 
-    PlayerBoard getPlayerBoard()
+    public PlayerBoard getPlayerBoard()
     {
         return playerBoard;
     }
 
-    GameState getGameState()
+    public GameState getGameState()
     {
         return gameState;
+    }
+
+    public void setGameState(GameState gameState)
+    {
+        this.gameState = gameState;
     }
 }
