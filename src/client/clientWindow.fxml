@@ -356,7 +356,7 @@
          <top>
             <Pane prefHeight="150.0" prefWidth="1000.0" style="-fx-background-color: #142850; -fx-border-color: #00909e;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fx:id="instructionText" fill="#dae1e7" layoutX="100.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ustaw statki" textAlignment="CENTER" wrappingWidth="800.0">
+                  <Text fx:id="instructionText" fill="#dae1e7" layoutX="20.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ustaw statki" textAlignment="CENTER" wrappingWidth="960.0">
                      <font>
                         <Font size="56.0" />
                      </font>

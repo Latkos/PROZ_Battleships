@@ -1,3 +1,5 @@
+package client;
+
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -22,6 +24,10 @@ public class Client {
         co oznaczałoby strzał w rząd 1 kolumnę B
         UWAGA WAŻNA RZECZ. GENERALNIE NUMERACJA MOJA JEST JAVOWA TZN. table[1][2] oznacza PIERWSZY RZĄD I DRUGĄ KOLUMNĘ. W STATKACH SIĘ MÓWI ODWROTNIE
         np strzelam w A3, ale tutaj używajmy tej Javowej proszę, bo tak jest w funkcjach :) */
+
+    /*tą funkcję trzeba w osobny wątek jakoś wepchać
+    * dorobię przekazywanie controllera do Client,
+    * wysyłanie info o strzale, gdzieś indziej się zrobi*/
     public void playListen() throws Exception {
         try {
             out.println("MELLON"); //test
@@ -92,9 +98,8 @@ public class Client {
         }
     }
 
-    public void login() {
+    public boolean login(String login, String password) {
         boolean didLoginSucceed = false;
-        while (!didLoginSucceed) {
             //te  ponizsze linijki nie powinny byc zakomentowane, tylko no nie ma funkcji jeszcze xD
             //displayWindowForLoginAndPassword
             //String login=getLoginFromWindow() TUTAJ PATRYK TRZEBA PRZESLAC JAKOS
@@ -117,13 +122,8 @@ public class Client {
                 //displayWrongPasswordWindow
                 System.out.println("Niepoprawne haslo");
             }
-        }
+
+        return didLoginSucceed;
     }
 
-
-    public static void main(String[] args) throws Exception {
-        Client client = new Client("localhost");
-        client.login();
-        client.playListen();
-    }
 }

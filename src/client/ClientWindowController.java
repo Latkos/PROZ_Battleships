@@ -30,7 +30,7 @@ public class ClientWindowController implements Initializable
     //Ships Amount Texts + chosenShipTypeText
 
     @FXML
-    private Text singleMasterShipsAmountText, twoMasterShipsAmountText, threeMasterShipsAmountText, fourMasterShipsAmountText, chosenShipTypeText;
+    private Text singleMasterShipsAmountText, twoMasterShipsAmountText, threeMasterShipsAmountText, fourMasterShipsAmountText, chosenShipTypeText, instructionText;
 
     //player and enemy fields
     @FXML
@@ -62,29 +62,84 @@ public class ClientWindowController implements Initializable
 
     private Pane[][] playerFields;
     private Pane[][] enemyFields;
-
+    private Client client;
     private Game game;
-    public void setGame(Game aGame)
-    {
-        game = aGame;
-    }
 
+    public void setGame(Game game)
+    {
+        this.game = game;
+    }
+    public void setClient(Client client)
+    {
+        this.client = client;
+    }
     public void updatePlayerGrid()
     {
-        for(int x = 0; x < 10; x++)
-            for(int y = 0; y < 10; y++)
-            {
-                switch (game.getPlayerBoard().getCellState(x, y))
-                {
-                    case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
+        switch(game.getGameState())
+        {
+            case SHIPS_SETUP -> {
+                for (int x = 0; x < 10; x++)
+                    for (int y = 0; y < 10; y++) {
+                        switch (game.getPlayerBoard().getCellState(x, y)) {
+                            case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
 
-                    case PROHIBITED -> playerFields[x][y].setStyle("-fx-background-color: #612727; -fx-border-color: #00909e;");
+                            case PROHIBITED -> playerFields[x][y].setStyle("-fx-background-color: #612727; -fx-border-color: #00909e;");
 
-                    case SHIP -> playerFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
-                }
+                            case SHIP -> playerFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
+                        }
+                    }
+                if (game.getPlayerBoard().getAmountShipsOfType(0) == 4 && game.getPlayerBoard().getAmountShipsOfType(1) == 3 && game.getPlayerBoard().getAmountShipsOfType(2) == 2 && game.getPlayerBoard().getAmountShipsOfType(3) == 1)
+                    setupButton.setDisable(false);
             }
-        if(game.getPlayerBoard().getAmountShipsOfType(0) == 4 && game.getPlayerBoard().getAmountShipsOfType(1) == 3 && game.getPlayerBoard().getAmountShipsOfType(2) == 2 && game.getPlayerBoard().getAmountShipsOfType(3) == 1)
-            setupButton.setDisable(false);
+            case WAITING_FOR_WHO_IS_FIRST -> {
+                game.getPlayerBoard().changeAllProhibitedCellsToBlank();
+
+                for (int x = 0; x < 10; x++)
+                    for (int y = 0; y < 10; y++) {
+                        switch (game.getPlayerBoard().getCellState(x, y)) {
+                            case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
+
+                            case SHIP -> playerFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
+                        }
+                    }
+
+                PositionRadioButtons.getToggles().forEach(toggle -> {
+                    Node node = (Node) toggle;
+                    node.setDisable(true);
+                });
+                instructionText.setText("Czekanie na ustawienie przeciwnika");
+            }
+
+            case ENEMY_MOVE -> {
+                for(int x = 0; x < 10; x++)
+                    for(int y = 0; y < 10; y++)
+                    {
+                        switch (game.getPlayerBoard().getCellState(x, y))
+                        {
+                            case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
+                            case SHIP -> playerFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
+                            case SHOT -> playerFields[x][y].setStyle("-fx-background-color: #a32121; -fx-border-color: #00909e");
+                            case SANK -> playerFields[x][y].setStyle("-fx-background-color: #302727; -fx-border-color: #00909e");
+                            case MISSED -> playerFields[x][y].setStyle("-fx-background-color: #00909e; -fx-border-color: #00909e");
+                        }
+                    }
+            }
+
+            case PLAYER_MOVE -> {
+                for(int x = 0; x < 10; x++)
+                    for(int y = 0; y < 10; y++)
+                    {
+                        switch (game.getPlayerBoard().getCellState(x, y))
+                        {
+                            case BLANK -> enemyFields[x][y].setStyle("-fx-border-color: #00909e;");
+                            case SHIP -> enemyFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
+                            case SHOT -> enemyFields[x][y].setStyle("-fx-background-color: #a32121; -fx-border-color: #00909e");
+                            case SANK -> enemyFields[x][y].setStyle("-fx-background-color: #302727; -fx-border-color: #00909e");
+                            case MISSED -> enemyFields[x][y].setStyle("-fx-background-color: #00909e; -fx-border-color: #00909e");
+                        }
+                    }
+            }
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -238,6 +293,7 @@ public class ClientWindowController implements Initializable
         else if(mouseEvent.getSource() == setupButton && game.getGameState() == Game.GameState.SHIPS_SETUP)
         {
             game.setGameState(Game.GameState.WAITING_FOR_WHO_IS_FIRST);
+            updatePlayerGrid();
         }
     }
 }
