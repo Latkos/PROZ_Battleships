@@ -56,7 +56,7 @@ public class LoginWindowController implements Initializable
 
                 Parent root = loader.load();
                 ClientWindowController clientWindowController = loader.getController();
-                //clientWindowController.setClient(client);
+                clientWindowController.setClient(client);
 
 
                 stage.setScene(new Scene(root));

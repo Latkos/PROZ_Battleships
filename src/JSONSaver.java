@@ -11,7 +11,8 @@ public class JSONSaver {
     }
 
     void put(String username, String response) {
-        gameCourse.add(username + " says " + response);
+       gameCourse.add(username+ " says " + response+ "");
+
     }
 
     void save() {
@@ -21,13 +22,12 @@ public class JSONSaver {
             file.write(gameCourse.toJSONString());
             file.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("PIERWSZY TRY");
         } finally {
             try {
-                assert file != null;
                 file.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("DRUGI TRY");
             }
         }
     }

@@ -257,6 +257,7 @@ public class ClientWindowController implements Initializable
             game.getPlayerBoard().changeAllProhibitedCellsToBlank();
             updatePlayerGrid();
             client.setController(this);
+            client.sendMessage("READY");
             client.startToListen();
         }
     }

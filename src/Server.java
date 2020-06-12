@@ -23,10 +23,13 @@ public class Server {
 
 class Game {
 
+    public Game() {
+        saver = new JSONSaver();
+    }
 
-    Player currentPlayer;
-    public int playerAmount;
-    JSONSaver saver;
+    Player firstPlayer;
+    Player secondPlayer;
+    public JSONSaver saver;
 
     class Player implements Runnable {
         int number;
@@ -35,6 +38,8 @@ class Game {
         Scanner input;
         PrintWriter output;
         String username;
+        boolean isReady = false;
+
         public Player(Socket socket, int number) {
             this.socket = socket;
             this.number = number;
@@ -50,7 +55,7 @@ class Game {
                 e.printStackTrace();
             } finally {
                 if (opponent != null && opponent.output != null) {
-                    opponent.output.println("OTHER_PLAYER_LEFT");
+                    opponent.output.println("LEFT");
                 }
                 try {
                     socket.close();
@@ -61,24 +66,23 @@ class Game {
         }
 
         private void login() throws InterruptedException {
-            boolean playerLoggedIn=false;
-            while(!playerLoggedIn) {
+            boolean playerLoggedIn = false;
+            while (!playerLoggedIn) {
                 username = input.nextLine();
                 String password = input.nextLine();
                 var connector = new DatabaseConnector();
                 try {
-                    playerLoggedIn=connector.loginUser(username, password);
+                    playerLoggedIn = connector.loginUser(username, password);
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
                 if (playerLoggedIn) {
                     output.println("LOGIN SUCCESSFUL");
                     connector.closeConnection();
-                }
-                else{
+                } else {
                     output.println("INCORRECT PASSWORD");
-                    while(!input.hasNextLine())
-                        Thread.sleep(500);
+                    while (!input.hasNextLine())
+                        Thread.sleep(50);
                 }
             }
         }
@@ -94,36 +98,55 @@ class Game {
             output.println("WELCOME " + number);
             //to się wytnie, na razie tego używam żeby sprawdzić
             if (number == 1) {
-                currentPlayer = this;
+                firstPlayer = this;
                 System.out.println("MESSAGE Waiting for opponent to connect");
                 output.println("MESSAGE Waiting for opponent to connect");
             } else {
-                opponent = currentPlayer;
+                secondPlayer = this;
+                opponent = firstPlayer;
                 opponent.opponent = this;
-                opponent.output.println("YOUR TURN");//opponent.output.println("MESSAGE Your move");
             }
             //TEGO WHILE TRUE NIE BEDZIE, ALBO TUTAJ CHOCIAZ JAKIS WARUNEK, ALBO JAKIS INTERRUPTED SLEEP CZY COS
             //doczytam jeszcze o tym, ale no while (true) to nie jest fajna praktyka, robie to dla testow zeby sprawdzic czy nasluchuja
-
-            while (true) {
-                while (opponent==null){
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if(input.hasNextLine()) {
-                    var command = input.nextLine();
-                    //tutaj np. do zapisu przebiegu gry w JSONie bedzie mozna te wiadomosci odpowiednio przetwarzac
-                    //ale na razie ten serwer to jest bardziej taki przekaznik
-                    // no i jakis warunek konczacy by sie przydalo dodac
-                    saver.put(username, command);
-                    opponent.output.println(command);
+            boolean haveWeInformedAboutReadiness = false;
+            while (opponent == null) {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-            //saver.save(); //to sie nigdy nie odbedzie dopoki nie poprawi sie tego while (true), na ten moment zostawiam-wiem ze JSON dziala
+            waitForBothPlayersReady();
+            while (true) {
+                if (input.hasNextLine()) {
+                    var command = input.nextLine();
+                    saver.put(username, command);
+                    opponent.output.println(command);
+                    if (command.startsWith("WINNER") || command.startsWith("LEFT"))
+                        break;
+                }
+            }
+            saver.save(); //to sie nigdy nie odbedzie dopoki nie poprawi sie tego while (true), na ten moment zostawiam-wiem ze JSON dziala
 
+        }
+        private void waitForBothPlayersReady(){
+            while(!isReady){
+                if (input.hasNextLine()) {
+                    var command=input.nextLine();
+                    if(command.startsWith("READY"))
+                        isReady=true;
+                }
+            }
+            output.println("YOU CAN PLAY NOW");
+            while(!opponent.isReady) {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(this==firstPlayer)
+                output.println("YOUR TURN");
         }
 
 

@@ -59,6 +59,8 @@ public class DatabaseConnector {
     }
 
     public boolean loginUser(String username, String password) throws SQLException {
+        if (username.isEmpty()||password.isEmpty())
+            return false;
         String oldPassword=password;
         if (!checkForUsername(username)) {
             password=hashPassword(password);
