@@ -54,7 +54,7 @@ public class LoginWindowController implements Initializable
                 Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("clientWindow.fxml"));
                 ClientWindowController clientWindowController = loader.getController();
-                clientWindowController.setClient(client);
+                //clientWindowController.setClient(client);
                 Parent root = loader.load();
                 stage.setScene(new Scene(root));
             }

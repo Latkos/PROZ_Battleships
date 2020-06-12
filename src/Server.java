@@ -26,7 +26,7 @@ class Game {
 
     Player currentPlayer;
     public int playerAmount;
-
+    JSONSaver saver;
 
     class Player implements Runnable {
         int number;
@@ -71,8 +71,10 @@ class Game {
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
-                if (playerLoggedIn)
+                if (playerLoggedIn) {
                     output.println("LOGIN SUCCESSFUL");
+                    connector.closeConnection();
+                }
                 else{
                     output.println("INCORRECT PASSWORD");
                     while(!input.hasNextLine())
@@ -116,10 +118,12 @@ class Game {
                     //tutaj np. do zapisu przebiegu gry w JSONie bedzie mozna te wiadomosci odpowiednio przetwarzac
                     //ale na razie ten serwer to jest bardziej taki przekaznik
                     // no i jakis warunek konczacy by sie przydalo dodac
-
+                    saver.put(username, command);
                     opponent.output.println(command);
                 }
             }
+            //saver.save(); //to sie nigdy nie odbedzie dopoki nie poprawi sie tego while (true), na ten moment zostawiam-wiem ze JSON dziala
+
         }
 
 

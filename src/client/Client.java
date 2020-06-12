@@ -104,8 +104,8 @@ public class Client {
             //displayWindowForLoginAndPassword
             //String login=getLoginFromWindow() TUTAJ PATRYK TRZEBA PRZESLAC JAKOS
             //String password=getPasswordFromWindow
-            out.println("test2");
-            out.println("test2");
+            out.println(login);
+            out.println(password);
             while (!in.hasNextLine()) {
                 try{
                     TimeUnit.MILLISECONDS.sleep(500);
