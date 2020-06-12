@@ -48,12 +48,6 @@ public class PlayerBoard extends Board {
 
         if (!changeCellStatesToShip(ship, x, y, isVertical)) return false;
         updateProhibitedFields();
-        for(int a = 0; a < 10; a++)
-        {
-            for(int b = 0; b < 10; b++)
-                System.out.print(board[a][b].getState() + " ");
-            System.out.println();
-        }
         ship.setPlaced(true);
         shipCounter[ship.getLength() - 1]++;
         return true;
@@ -69,18 +63,14 @@ public class PlayerBoard extends Board {
     }
 
     private boolean changeCellStatesToShip(Ship ship, int x, int y, boolean isVertical) {
-        //int startX = ship.beginning.getX();
-        //int startY = ship.beginning.getY();
         int length = ship.getLength();
         ship.setVertical(isVertical);
         if (isVertical) {
-            System.out.println("cosik");
             for (int a = y; a < y + length; a++)
                 if (a > 9 || board[x][a].getState() != EnumCellStates.BLANK)
                     return false;
 
             for (int a = y; a < y + length; a++) {
-                //System.out.println(a);
                 board[x][a].setState(EnumCellStates.SHIP);
                 board[x][a].setAlignedShip(ship);
             }

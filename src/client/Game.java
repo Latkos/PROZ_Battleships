@@ -2,7 +2,7 @@ package client;
 
 public class Game
 {
-    public enum GameState { SHIPS_SETUP, WAITING_FOR_WHO_IS_FIRST, PLAYER_MOVE, ENEMY_MOVE, WIN, LOSE};
+    public enum GameState { SHIPS_SETUP, WAITING_FOR_SERVER, PLAYER_MOVE, ENEMY_MOVE, BLOCK, WIN, LOSE};
 
     private PlayerBoard playerBoard;
     private EnemyBoard enemyBoard;
@@ -23,6 +23,11 @@ public class Game
     public GameState getGameState()
     {
         return gameState;
+    }
+
+    public EnemyBoard getEnemyBoard()
+    {
+        return enemyBoard;
     }
 
     public void setGameState(GameState gameState)

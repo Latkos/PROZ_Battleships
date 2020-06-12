@@ -100,7 +100,7 @@ class Game {
             } else {
                 opponent = currentPlayer;
                 opponent.opponent = this;
-                opponent.output.println("MESSAGE Your move");
+                opponent.output.println("YOUR TURN");//opponent.output.println("MESSAGE Your move");
             }
             //TEGO WHILE TRUE NIE BEDZIE, ALBO TUTAJ CHOCIAZ JAKIS WARUNEK, ALBO JAKIS INTERRUPTED SLEEP CZY COS
             //doczytam jeszcze o tym, ale no while (true) to nie jest fajna praktyka, robie to dla testow zeby sprawdzic czy nasluchuja

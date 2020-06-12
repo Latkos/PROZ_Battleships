@@ -1,8 +1,10 @@
 package client;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -64,56 +66,16 @@ public class ClientWindowController implements Initializable
     private Pane[][] enemyFields;
     private Client client;
     private Game game;
+    private int lastX, lastY;
 
-    public void setGame(Game game)
-    {
-        this.game = game;
-    }
     public void setClient(Client client)
     {
         this.client = client;
     }
     public void updatePlayerGrid()
     {
-        switch(game.getGameState())
-        {
-            case SHIPS_SETUP -> {
-                for (int x = 0; x < 10; x++)
-                    for (int y = 0; y < 10; y++) {
-                        switch (game.getPlayerBoard().getCellState(x, y)) {
-                            case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
-
-                            case PROHIBITED -> playerFields[x][y].setStyle("-fx-background-color: #612727; -fx-border-color: #00909e;");
-
-                            case SHIP -> playerFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
-                        }
-                    }
-                if (game.getPlayerBoard().getAmountShipsOfType(0) == 4 && game.getPlayerBoard().getAmountShipsOfType(1) == 3 && game.getPlayerBoard().getAmountShipsOfType(2) == 2 && game.getPlayerBoard().getAmountShipsOfType(3) == 1)
-                    setupButton.setDisable(false);
-            }
-            case WAITING_FOR_WHO_IS_FIRST -> {
-                game.getPlayerBoard().changeAllProhibitedCellsToBlank();
-
-                for (int x = 0; x < 10; x++)
-                    for (int y = 0; y < 10; y++) {
-                        switch (game.getPlayerBoard().getCellState(x, y)) {
-                            case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
-
-                            case SHIP -> playerFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
-                        }
-                    }
-
-                PositionRadioButtons.getToggles().forEach(toggle -> {
-                    Node node = (Node) toggle;
-                    node.setDisable(true);
-                });
-                instructionText.setText("Czekanie na ustawienie przeciwnika");
-            }
-
-            case ENEMY_MOVE -> {
-                for(int x = 0; x < 10; x++)
-                    for(int y = 0; y < 10; y++)
-                    {
+        for(int x = 0; x < 10; x++)
+            for(int y = 0; y < 10; y++)
                         switch (game.getPlayerBoard().getCellState(x, y))
                         {
                             case BLANK -> playerFields[x][y].setStyle("-fx-border-color: #00909e;");
@@ -121,25 +83,22 @@ public class ClientWindowController implements Initializable
                             case SHOT -> playerFields[x][y].setStyle("-fx-background-color: #a32121; -fx-border-color: #00909e");
                             case SANK -> playerFields[x][y].setStyle("-fx-background-color: #302727; -fx-border-color: #00909e");
                             case MISSED -> playerFields[x][y].setStyle("-fx-background-color: #00909e; -fx-border-color: #00909e");
+                            case PROHIBITED -> playerFields[x][y].setStyle("-fx-background-color: #612727; -fx-border-color: #00909e;");
                         }
-                    }
-            }
+    }
 
-            case PLAYER_MOVE -> {
-                for(int x = 0; x < 10; x++)
-                    for(int y = 0; y < 10; y++)
-                    {
-                        switch (game.getPlayerBoard().getCellState(x, y))
-                        {
-                            case BLANK -> enemyFields[x][y].setStyle("-fx-border-color: #00909e;");
-                            case SHIP -> enemyFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
-                            case SHOT -> enemyFields[x][y].setStyle("-fx-background-color: #a32121; -fx-border-color: #00909e");
-                            case SANK -> enemyFields[x][y].setStyle("-fx-background-color: #302727; -fx-border-color: #00909e");
-                            case MISSED -> enemyFields[x][y].setStyle("-fx-background-color: #00909e; -fx-border-color: #00909e");
-                        }
-                    }
-            }
-        }
+    public void updateEnemyGrid()
+    {
+        for(int x = 0; x < 10; x++)
+            for(int y = 0; y < 10; y++)
+                switch (game.getEnemyBoard().getCellState(x, y))
+                {
+                    case BLANK -> enemyFields[x][y].setStyle("-fx-border-color: #00909e;");
+                    case SHIP -> enemyFields[x][y].setStyle("-fx-background-color: #613b27; -fx-border-color: #00909e;");
+                    case SHOT -> enemyFields[x][y].setStyle("-fx-background-color: #a32121; -fx-border-color: #00909e");
+                    case SANK -> enemyFields[x][y].setStyle("-fx-background-color: #302727; -fx-border-color: #00909e");
+                    case MISSED -> enemyFields[x][y].setStyle("-fx-background-color: #00909e; -fx-border-color: #00909e");
+                }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -260,6 +219,8 @@ public class ClientWindowController implements Initializable
                         fourMasterChoiceButton.setDisable(true);
                     }
                 }
+                if(game.getPlayerBoard().getAmountShipsOfType(0) == 4 && game.getPlayerBoard().getAmountShipsOfType(1) == 3 && game.getPlayerBoard().getAmountShipsOfType(2) == 2 && game.getPlayerBoard().getAmountShipsOfType(3) == 1)
+                    setupButton.setDisable(false);
             }
         }
     }
@@ -292,8 +253,125 @@ public class ClientWindowController implements Initializable
 
         else if(mouseEvent.getSource() == setupButton && game.getGameState() == Game.GameState.SHIPS_SETUP)
         {
-            game.setGameState(Game.GameState.WAITING_FOR_WHO_IS_FIRST);
+            game.setGameState(Game.GameState.WAITING_FOR_SERVER);
+            game.getPlayerBoard().changeAllProhibitedCellsToBlank();
             updatePlayerGrid();
+            client.setController(this);
+            client.startToListen();
         }
+    }
+
+    public void enemyGridMouseAction(MouseEvent mouseEvent)
+    {
+        if(game.getGameState() == Game.GameState.PLAYER_MOVE)
+        {
+            /*
+                A->Sprawdz, czy juz zostalo to klikniete
+                B->Jesli nie to przekaz informacje, i zmien status gry
+                C->Jesli tak to zignoruj
+             */
+            Node source = (Node) mouseEvent.getSource();
+
+            if(source instanceof Pane)
+            {
+                int row = GridPane.getRowIndex(source) - 1;
+                int column = GridPane.getColumnIndex(source) -1;
+
+                lastX = column;
+                lastY = row;
+
+                if(game.getEnemyBoard().getCellState(column, row) == EnumCellStates.BLANK)
+                {
+                    game.setGameState(Game.GameState.BLOCK);
+                    enemyFields[column][row].setStyle("-fx-background-color: #612727;");
+                    String msg = "SHOOT ";
+                    msg = msg + column;
+                    msg = msg + row;
+
+                    client.sendMessage(msg);
+                }
+            }
+        }
+    }
+
+    // handleFunctions
+
+    // x-> column y -> row
+    public void shootMsgHandle(int x, int y)
+    {
+        int msg_code = game.getPlayerBoard().hit(x, y);
+        lastX = x;
+        lastY = y;
+
+        if(game.getPlayerBoard().allShipsAreSunk())
+        {
+            client.sendMessage("WINNER");
+            game.setGameState(Game.GameState.WIN);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Przegrana");
+            alert.setHeaderText("Przegrales rozgrywke!");
+
+            client.stopToListen();
+            Platform.exit();
+        }
+        else
+        {
+            game.setGameState(Game.GameState.ENEMY_MOVE); //Enemy_move itd to wszystko prawdopodobnie do block pojdzie
+
+            switch (msg_code)
+            {
+                case 0 -> client.sendMessage("MISSED");
+                case 1 -> client.sendMessage("SANK");
+                case 2 -> client.sendMessage("HIT");
+            }
+            //zmiana na stanu gry na czekanie na serwer
+            //wysylka info
+
+
+            Platform.runLater(()-> {
+                instructionText.setText("Ruch wroga");
+                updatePlayerGrid();
+            });
+        }
+
+    }
+
+    public void yourTurnMsgHandle()
+    {
+        game.setGameState(Game.GameState.PLAYER_MOVE);
+        instructionText.setText("Twoj ruch");
+        /*
+        * wysylka wiadomosci bedzie w odpowiednim buttonAction
+        * */
+    }
+
+    public void missedMsgHandle()
+    {
+        game.getEnemyBoard().setBoardCellState(lastX, lastY, EnumCellStates.MISSED);
+        game.setGameState(Game.GameState.ENEMY_MOVE);
+        client.sendMessage("YOUR TURN");
+        Platform.runLater(() -> {
+            instructionText.setText("Ruch przeciwnika");
+            updateEnemyGrid();
+        });
+    }
+
+    public void winnerMsgHandle()
+    {
+        game.setGameState(Game.GameState.WIN);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wygrana");
+        alert.setHeaderText("Wygrałeś rozgrywkę");
+
+        client.stopToListen();
+        Platform.exit();
+    }
+
+    public void sankHitMsgHandle()
+    {
+        game.getEnemyBoard().setBoardCellState(lastX, lastY, EnumCellStates.SHOT);
+        game.setGameState(Game.GameState.PLAYER_MOVE);
+        Platform.runLater(()->{instructionText.setText("Twoj ruch");
+            updateEnemyGrid();});
     }
 }

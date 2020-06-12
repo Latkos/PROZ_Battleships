@@ -43,5 +43,10 @@ public class Main extends Application
     {
         //sprzatanie po aplikacji
         //czyli np zamkniecie polaczenia z serwerem itd
+        if(client != null)
+        {
+            client.stopToListen();
+        }
+
     }
 }
