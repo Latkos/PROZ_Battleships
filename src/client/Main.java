@@ -50,6 +50,7 @@ public class Main extends Application
         }
     }
 
+    @Override
     public void stop()
     {
         if(client != null)

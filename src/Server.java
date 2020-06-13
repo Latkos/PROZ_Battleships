@@ -11,7 +11,7 @@ public class Server {
     public static void main(String[] args) throws Exception {
         try (var listener = new ServerSocket(12345)) {
             System.out.println("Server is Running...");
-            var pool = Executors.newFixedThreadPool(1000);
+            var pool = Executors.newCachedThreadPool();
             while (true) {
                 Game game = new Game();
                 pool.execute(game.new Player(listener.accept(), 1));

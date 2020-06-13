@@ -15,18 +15,30 @@ public class Client {
     private Thread msgListener;
     ClientWindowController controller;
     private boolean canStartYet = false;
-    private boolean loginSuccess;
 
+
+
+    private boolean didLose=false;
+    private boolean loginSuccess;
     public Client(String serverAddress) throws Exception {
         socket = new Socket(serverAddress, 12345);
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
     }
 
+    public boolean DidLose() {
+        return didLose;
+    }
+
+    public void setDidLose(boolean didLose) {
+        this.didLose = didLose;
+    }
+
     private void playListen() {
         msgListener = new Thread(() -> {
             try {
-                while (true) {
+                boolean theGameHasEnded=false;
+                while (!theGameHasEnded) {
                     if (in.hasNextLine()) {
                         waitTillAbleToPlay();
                         String response = in.nextLine();
@@ -35,7 +47,7 @@ public class Client {
                         }
                         if (response.startsWith("WINNER")) {
                             controller.winnerMsgHandle();
-                            break;
+                            theGameHasEnded=true;
                         }
                         if (response.startsWith("SHOOT")) {
                             int x = Character.getNumericValue(response.charAt(6));
@@ -62,8 +74,12 @@ public class Client {
                         }
                         if (response.startsWith("LEFT")) {
                             controller.winnerMsgHandle();
-                            break;
+                            theGameHasEnded=true;
                         }
+                    }
+                    else if (!didLose){
+                        controller.lostServerConnectionHandler();
+                        break;
                     }
                 }
 
@@ -103,8 +119,7 @@ public class Client {
     }
 
     public void sendMessage(String msg) {
-        System.out.println("S: " + msg);
-        out.println(msg);
+            out.println(msg);
     }
 
 

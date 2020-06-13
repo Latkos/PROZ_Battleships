@@ -96,13 +96,14 @@ class Game {
 
             while (opponent == null) sleep();
             waitForBothPlayersReady();
-            while (true) {
+            boolean theGameHasEnded=false;
+            while (!theGameHasEnded) {
                 if (input.hasNextLine()) {
                     var command = input.nextLine();
                     saver.put(username, command);
                     opponent.output.println(command);
                     if (command.startsWith("WINNER") || command.startsWith("LEFT"))
-                        break;
+                        theGameHasEnded=true;
                 }
             }
             saver.save();
@@ -118,13 +119,7 @@ class Game {
                 }
             }
             output.println("YOU CAN PLAY NOW");
-            while (!opponent.isReady) {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            while (!opponent.isReady) sleep();
             if (this == firstPlayer) {
                 output.println("ENEMY " + opponent.username);
                 output.println("YOUR TURN");

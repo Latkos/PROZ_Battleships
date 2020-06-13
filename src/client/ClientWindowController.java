@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
 public class ClientWindowController implements Initializable {
     private enum ChosenShip {noShip, singleMaster, twoMaster, threeMaster, fourMaster}
 
-    ;
     private ChosenShip chosenShip;
     //choiceButtons
     @FXML
@@ -100,10 +99,8 @@ public class ClientWindowController implements Initializable {
                 }
     }
 
-    private void updatePlayerShipsAmountInformation()
-    {
-        switch (game.getPlayerBoard().getAmountShipsOfType(0))
-        {
+    private void updatePlayerShipsAmountInformation() {
+        switch (game.getPlayerBoard().getAmountShipsOfType(0)) {
             case 0 -> singleMasterShipsAmountText.setText("0/4");
             case 1 -> singleMasterShipsAmountText.setText("1/4");
             case 2 -> singleMasterShipsAmountText.setText("2/4");
@@ -133,19 +130,17 @@ public class ClientWindowController implements Initializable {
             }
         }
 
-        switch (game.getPlayerBoard().getAmountShipsOfType(3))
-        {
+        switch (game.getPlayerBoard().getAmountShipsOfType(3)) {
             case 0 -> fourMasterShipsAmountText.setText("0/1");
             case 1 -> {
                 fourMasterShipsAmountText.setText("1/1");
-                fourMasterChoiceButton.setDisable(true);}
+                fourMasterChoiceButton.setDisable(true);
+            }
         }
     }
 
-    private void updateEnemyShipsAmountInformation()
-    {
-        switch (game.getEnemyBoard().getAmountShipsOfType(0))
-        {
+    private void updateEnemyShipsAmountInformation() {
+        switch (game.getEnemyBoard().getAmountShipsOfType(0)) {
             case 0 -> enemySingleMasterShipsAmountText.setText("0/4");
             case 1 -> enemySingleMasterShipsAmountText.setText("1/4");
             case 2 -> enemySingleMasterShipsAmountText.setText("2/4");
@@ -157,9 +152,7 @@ public class ClientWindowController implements Initializable {
             case 0 -> enemyTwoMasterShipsAmountText.setText("0/3");
             case 1 -> enemyTwoMasterShipsAmountText.setText("1/3");
             case 2 -> enemyTwoMasterShipsAmountText.setText("2/3");
-            case 3 -> {
-                enemyTwoMasterShipsAmountText.setText("3/3");
-            }
+            case 3 -> enemyTwoMasterShipsAmountText.setText("3/3");
         }
 
         switch (game.getEnemyBoard().getAmountShipsOfType(2)) {
@@ -169,8 +162,7 @@ public class ClientWindowController implements Initializable {
 
         }
 
-        switch (game.getEnemyBoard().getAmountShipsOfType(3))
-        {
+        switch (game.getEnemyBoard().getAmountShipsOfType(3)) {
             case 0 -> enemyFourMasterShipsAmountText.setText("0/1");
             case 1 -> enemyFourMasterShipsAmountText.setText("1/1");
         }
@@ -231,10 +223,8 @@ public class ClientWindowController implements Initializable {
                     if (game.getPlayerBoard().placeShip(2, column, row - 1, (PositionRadioButtons.getSelectedToggle() == verticallyOption))) {
                         updatePlayerGrid();
                         updatePlayerShipsAmountInformation();
-                        }
-                }
-
-                else if (chosenShip == ChosenShip.threeMaster) //#426127
+                    }
+                } else if (chosenShip == ChosenShip.threeMaster) //#426127
                 {
                     int row = GridPane.getRowIndex(source);
                     int column = GridPane.getColumnIndex(source);
@@ -323,6 +313,7 @@ public class ClientWindowController implements Initializable {
 
         if (game.getPlayerBoard().allShipsAreSunk()) {
             client.sendMessage("WINNER");
+            client.setDidLose(true);
             client.stopToListen();
             game.setGameState(Game.GameState.LOSE);
 
@@ -419,4 +410,14 @@ public class ClientWindowController implements Initializable {
             usersInformation.setText("Ty vs " + msg);
         });
     }
+    public void lostServerConnectionHandler() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Błąd serwera");
+            alert.setContentText("Nie odnaleziono serwera");
+            alert.showAndWait();
+            Platform.exit();});
+    }
+
 }
