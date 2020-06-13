@@ -1,7 +1,7 @@
 package client;
 
 public class Board {
-    protected Cell[][] board; //to chyba powinno byc public #nope w Javie trzeba starac sie, zeby wszystko bylo hermetyczne, a wiec konieczne sa funkcje do obslugie tego i zamiana na private
+    protected Cell[][] board;
     protected int[] shipCounter;
 
     /*

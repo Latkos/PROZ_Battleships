@@ -1,6 +1,6 @@
 package client;
 
-enum EnumCellStates {
+public enum EnumCellStates {
     BLANK,
     SHIP,
     MISSED,

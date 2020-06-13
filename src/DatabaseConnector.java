@@ -15,13 +15,15 @@ public class DatabaseConnector {
         }
         encryptor = new StrongPasswordEncryptor();
     }
-    public void closeConnection(){
+
+    public void closeConnection() {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
+
     public String hashPassword(String password) {
         return encryptor.encryptPassword(password);
     }
@@ -55,15 +57,15 @@ public class DatabaseConnector {
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
         String realPassword = rs.getString("Password");
-        return encryptor.checkPassword(password,realPassword);
+        return encryptor.checkPassword(password, realPassword);
     }
 
     public boolean loginUser(String username, String password) throws SQLException {
-        if (username.isEmpty()||password.isEmpty())
+        if (username.isEmpty() || password.isEmpty())
             return false;
-        String oldPassword=password;
+        String oldPassword = password;
         if (!checkForUsername(username)) {
-            password=hashPassword(password);
+            password = hashPassword(password);
             createUser(username, password);
         }
         return checkForPasswordCorrectness(username, oldPassword);

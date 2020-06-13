@@ -18,8 +18,6 @@ public class Main extends Application
     @Override
     public void init()
     {
-        //Tu zalatwia sie rzeczy wstepne typu polaczenie z baza danych itd
-        //Mozliwe, ze tutaj bedzie nawiazywanie polaczenia z serwerem
         try {
             client = new Client("localhost");
         } catch (Exception e) {
@@ -34,7 +32,6 @@ public class Main extends Application
         LoginWindowController loginWindowController = loader.getController();
         loginWindowController.setClient(client);
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.setTitle("Battleships - logowanie");
         stage.show();
@@ -42,8 +39,6 @@ public class Main extends Application
 
     public void stop()
     {
-        //sprzatanie po aplikacji
-        //czyli np zamkniecie polaczenia z serwerem itd
         if(client != null)
         {
             client.stopToListen();

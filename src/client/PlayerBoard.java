@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class PlayerBoard extends Board {
     ArrayList<Ship> shipList;
 
+    public Cell getBoardCell(int x, int y){
+        return board[x][y];
+    }
     public boolean allShipsAreSunk() {
         for (int a = 0; a < 4; a++) {
             if (shipCounter[a] != 0) {
@@ -17,23 +20,22 @@ public class PlayerBoard extends Board {
     }
 
     public int hit(int x, int y) {
-        if (board[x][y].getState() != EnumCellStates.SHIP){
+        if (board[x][y].getState() != EnumCellStates.SHIP) {
             board[x][y].setState(EnumCellStates.MISSED);
             return 0; //not hit
         }
         board[x][y].setState(EnumCellStates.SHOT);
         Ship ship = board[x][y].getAlignedShip();
         ship.decrementCellsLeft();
-        if (ship.getCellsLeft() == 0) { //we just sank a shit
+        if (ship.getCellsLeft() == 0) {
             shipCounter[ship.getLength() - 1]--;
             sinkAllShipCells(ship);
-            return 2;
+            return 2; //sank
         }
         return 1; //hit but not sank
     }
 
-    private Ship getShipToPlace(int length)
-    {
+    private Ship getShipToPlace(int length) {
         for (Ship ship : shipList) {
             if (!ship.isPlaced() && ship.getLength() == length) {
                 return ship;
@@ -42,10 +44,10 @@ public class PlayerBoard extends Board {
         return null;
     }
 
-    public boolean placeShip(int length, int x, int y, boolean isVertical) { //x -> column, y -> row
+    public boolean placeShip(int length, int x, int y, boolean isVertical) {
         Ship ship = getShipToPlace(length);
 
-        if(ship == null) //przypadek, gdyby funkcja nie zwrocila zadnego statku
+        if (ship == null) //przypadek, gdyby funkcja nie zwrocila zadnego statku
             return false;
 
         if (!changeCellStatesToShip(ship, x, y, isVertical)) return false;
@@ -76,22 +78,18 @@ public class PlayerBoard extends Board {
                 board[x][a].setState(EnumCellStates.SHIP);
                 board[x][a].setAlignedShip(ship);
             }
-        }
-        else
-        {
-            for (int a = x; a < x + length; a++)
-            {
+        } else {
+            for (int a = x; a < x + length; a++) {
                 if (a > 9 || board[a][y].getState() != EnumCellStates.BLANK)
                     return false;
             }
 
-            for (int a = x; a < x+length; a++) {
+            for (int a = x; a < x + length; a++) {
                 board[a][y].setState(EnumCellStates.SHIP);
                 board[a][y].setAlignedShip(ship);
             }
         }
         ship.setBeginning(board[x][y]);
-
         return true;
     }
 
@@ -136,40 +134,35 @@ public class PlayerBoard extends Board {
     i = 2 -> three-masted
     i = 3 -> four-masted
  */
-    public int getAmountShipsOfType(int i)
-    {
+    public int getAmountShipsOfType(int i) {
         return shipCounter[i];
     }
 
-    public EnumCellStates getCellState(int x, int y)
-    {
+    public EnumCellStates getCellState(int x, int y) {
         return board[x][y].getState();
     }
 
-    public String getShipInformation(int x, int y)
-    {
-            Ship ship = board[x][y].getAlignedShip();
-            x = ship.getBeginning().getX();
-            y = ship.getBeginning().getY();
-            int isV = ship.isVertical() ? 1 : 0;
-            int length = ship.getLength();
-            int msgCode = 10000;
-            msgCode += x * 1000 + y * 100 + isV * 10 + length;
-            return Integer.toString(msgCode);
+    public String getShipInformation(int x, int y) {
+        Ship ship = board[x][y].getAlignedShip();
+        x = ship.getBeginning().getX();
+        y = ship.getBeginning().getY();
+        int isV = ship.isVertical() ? 1 : 0;
+        int length = ship.getLength();
+        int msgCode = 10000;
+        msgCode += x * 1000 + y * 100 + isV * 10 + length;
+        return Integer.toString(msgCode);
     }
 
-    public PlayerBoard()
-    {
+    public PlayerBoard() {
         super();
         shipList = new ArrayList<>();
-        for(int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             shipList.add(new Ship(1));
-            if(i < 3)
+            if (i < 3)
                 shipList.add(new Ship(2));
-            if(i < 2)
+            if (i < 2)
                 shipList.add(new Ship(3));
-            if(i == 0)
+            if (i == 0)
                 shipList.add(new Ship(4));
         }
     }

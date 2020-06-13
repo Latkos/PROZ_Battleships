@@ -3,7 +3,7 @@ package client;
 public class Ship {
 
     private boolean isPlaced = false;
-    public Cell beginning; //mozliwe ze potem zmienie to public, zobaczymy
+    public Cell beginning;
     private int length;
     private boolean isVertical;
     int cellsLeft;
