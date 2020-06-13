@@ -68,8 +68,14 @@ class Game {
         private void login() throws InterruptedException {
             boolean playerLoggedIn = false;
             while (!playerLoggedIn) {
+
                 username = input.nextLine();
                 String password = input.nextLine();
+                if (opponent != null && username.equals(opponent.username)) {
+                    output.println("SAME USERNAME");
+                    continue;
+                }
+
                 var connector = new DatabaseConnector();
                 try {
                     playerLoggedIn = connector.loginUser(username, password);
@@ -90,22 +96,18 @@ class Game {
         private void setup() throws IOException {
             input = new Scanner(socket.getInputStream());
             output = new PrintWriter(socket.getOutputStream(), true);
-
-        }
-
-        private void processPlayerCommands() {
-
-            output.println("WELCOME " + number);
-            //to się wytnie, na razie tego używam żeby sprawdzić
             if (number == 1) {
                 firstPlayer = this;
-                System.out.println("MESSAGE Waiting for opponent to connect");
-                output.println("MESSAGE Waiting for opponent to connect");
             } else {
                 secondPlayer = this;
                 opponent = firstPlayer;
                 opponent.opponent = this;
             }
+
+        }
+
+        private void processPlayerCommands() {
+
             //TEGO WHILE TRUE NIE BEDZIE, ALBO TUTAJ CHOCIAZ JAKIS WARUNEK, ALBO JAKIS INTERRUPTED SLEEP CZY COS
             //doczytam jeszcze o tym, ale no while (true) to nie jest fajna praktyka, robie to dla testow zeby sprawdzic czy nasluchuja
             boolean haveWeInformedAboutReadiness = false;
@@ -129,24 +131,29 @@ class Game {
             saver.save(); //to sie nigdy nie odbedzie dopoki nie poprawi sie tego while (true), na ten moment zostawiam-wiem ze JSON dziala
 
         }
-        private void waitForBothPlayersReady(){
-            while(!isReady){
+
+        private void waitForBothPlayersReady() {
+            while (!isReady) {
                 if (input.hasNextLine()) {
-                    var command=input.nextLine();
-                    if(command.startsWith("READY"))
-                        isReady=true;
+                    var command = input.nextLine();
+                    if (command.startsWith("READY"))
+                        isReady = true;
                 }
             }
             output.println("YOU CAN PLAY NOW");
-            while(!opponent.isReady) {
+            while (!opponent.isReady) {
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            if(this==firstPlayer)
+            if (this == firstPlayer) {
+                System.out.println("WSZEDLEM W TO");
                 output.println("YOUR TURN");
+                output.println("ENEMY USERNAME " + opponent.username);
+                opponent.output.println("ENEMY USERNAME " + username);
+            }
         }
 
 

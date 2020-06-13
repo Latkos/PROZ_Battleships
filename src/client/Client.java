@@ -46,6 +46,9 @@ public class Client {
                             }
                             String response = in.nextLine();
                             System.out.println(response);
+                            if (response.startsWith("ENEMY USERNAME")){
+                                //zrob cos
+                            }
                             if (response.startsWith("WINNER")) {
                                 controller.winnerMsgHandle();
                                 break;
@@ -119,6 +122,9 @@ public class Client {
             }
         }
         String response = in.nextLine();
+        if(response.startsWith("SAME USERNAME")){
+            System.out.println("Ten sam username");
+        }
         if (response.startsWith("LOGIN SUCCESSFUL")) {
             System.out.println("UDALO SIE");
             didLoginSucceed = true;
