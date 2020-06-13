@@ -66,7 +66,8 @@ public class LoginWindowController implements Initializable
             {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Błąd logowania");
-                alert.setHeaderText("Podano nie prawidłowy login lub hasło");
+                alert.setHeaderText("Błąd logowania");
+                alert.setContentText("Nieprawidłowe dane logowanie lub gracz już w grze");
                 alert.showAndWait();
             }
         }

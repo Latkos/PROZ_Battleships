@@ -15,6 +15,7 @@ public class Client {
     private Thread msgListener;
     ClientWindowController controller;
     private boolean canStartYet=false;
+    private boolean loginSuccess;
     public Client(String serverAddress) throws Exception {
         socket = new Socket(serverAddress, 12345);
         in = new Scanner(socket.getInputStream());
@@ -46,8 +47,8 @@ public class Client {
                             }
                             String response = in.nextLine();
                             System.out.println(response);
-                            if (response.startsWith("ENEMY USERNAME")){
-                                //zrob cos
+                            if (response.startsWith("ENEMY ")){
+                                controller.usrMsgHandle(response.substring(6));
                             }
                             if (response.startsWith("WINNER")) {
                                 controller.winnerMsgHandle();
@@ -120,7 +121,7 @@ public class Client {
 
 
     public boolean login(String login, String password) {
-        boolean didLoginSucceed = false;
+        loginSuccess = false;
         out.println(login);
         out.println(password);
         while (!in.hasNextLine()) {
@@ -131,19 +132,15 @@ public class Client {
             }
         }
         String response = in.nextLine();
-        if(response.startsWith("SAME USERNAME")){
-            System.out.println("Ten sam username");
-        }
         if (response.startsWith("LOGIN SUCCESSFUL")) {
             System.out.println("UDALO SIE");
-            didLoginSucceed = true;
+            loginSuccess = true;
         }
-        if (response.startsWith("INCORRECT PASSWORD")) {
-            //displayWrongPasswordWindow
-            System.out.println("Niepoprawne haslo");
-        }
-
-        return didLoginSucceed;
+        return loginSuccess;
     }
 
+    public boolean getLoginSuccess()
+    {
+        return loginSuccess;
+    }
 }

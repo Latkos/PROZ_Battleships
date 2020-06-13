@@ -150,9 +150,9 @@ class Game {
             }
             if (this == firstPlayer) {
                 System.out.println("WSZEDLEM W TO");
+                output.println("ENEMY " + opponent.username);
                 output.println("YOUR TURN");
-                output.println("ENEMY USERNAME " + opponent.username);
-                opponent.output.println("ENEMY USERNAME " + username);
+                opponent.output.println("ENEMY " + username);
             }
         }
 

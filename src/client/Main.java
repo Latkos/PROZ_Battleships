@@ -47,6 +47,11 @@ public class Main extends Application
         if(client != null)
         {
             client.stopToListen();
+
+            if(client.getLoginSuccess())
+            {
+                client.sendMessage("LEFT");
+            }
         }
 
     }

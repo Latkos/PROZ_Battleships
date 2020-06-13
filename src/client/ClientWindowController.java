@@ -316,7 +316,8 @@ public class ClientWindowController implements Initializable
             Platform.runLater(()->{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Przegrana");
-                alert.setHeaderText("Przegrales rozgrywke!");
+                alert.setHeaderText("Przegrana");
+                alert.setContentText("Przegrałeś rozgrywkę!");
                 alert.showAndWait();
 
                 Platform.exit();});
@@ -347,8 +348,7 @@ public class ClientWindowController implements Initializable
     public void yourTurnMsgHandle()
     {
         game.setGameState(Game.GameState.PLAYER_MOVE);
-        instructionText.setText("Twoj ruch");
-        usersInformation.setText("Gra z wrogiem");
+        Platform.runLater(() -> instructionText.setText("Twój ruch"));
 
         /*
         * wysylka wiadomosci bedzie w odpowiednim buttonAction
@@ -362,7 +362,6 @@ public class ClientWindowController implements Initializable
         client.sendMessage("YOUR TURN");
         Platform.runLater(() -> {
             instructionText.setText("Ruch przeciwnika");
-            usersInformation.setText("Gra z wrogiem");
             updateEnemyGrid();
         });
     }
@@ -377,7 +376,10 @@ public class ClientWindowController implements Initializable
 
         Platform.runLater(() -> {Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Wygrana");
-            alert.setHeaderText("Wygrałeś rozgrywkę"); alert.showAndWait(); Platform.exit();});
+            alert.setHeaderText("Wygrana!");
+            alert.setContentText("Wygrałeś rozgrywkę!");
+            alert.showAndWait();
+            Platform.exit();});
     }
 
     public void hitMsgHandle()
@@ -385,7 +387,6 @@ public class ClientWindowController implements Initializable
         game.getEnemyBoard().setBoardCellState(lastX, lastY, EnumCellStates.SHOT);
         game.setGameState(Game.GameState.PLAYER_MOVE);
         Platform.runLater(()->{instructionText.setText("Twoj ruch");
-            usersInformation.setText("Gra z wrogiem");
             updateEnemyGrid();});
     }
 
@@ -394,7 +395,15 @@ public class ClientWindowController implements Initializable
         game.getEnemyBoard().sinkShip(x, y, isVertical, length);
         game.setGameState(Game.GameState.PLAYER_MOVE);
         Platform.runLater(()->{instructionText.setText("Twoj ruch");
-            usersInformation.setText("Gra z wrogiem");
             updateEnemyGrid();});
+    }
+
+    public void usrMsgHandle(String msg)
+    {
+        game.setGameState(Game.GameState.ENEMY_MOVE);
+        Platform.runLater(()->{
+            instructionText.setText("Ruch przeciwinika");
+            usersInformation.setText("Ty vs " + msg);
+        });
     }
 }
