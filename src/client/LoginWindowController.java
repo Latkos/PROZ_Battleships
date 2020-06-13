@@ -58,7 +58,7 @@ public class LoginWindowController implements Initializable
                 ClientWindowController clientWindowController = loader.getController();
                 clientWindowController.setClient(client);
 
-
+                stage.setTitle("Battleships");
                 stage.setScene(new Scene(root));
             }
 

@@ -32,7 +32,7 @@ public class ClientWindowController implements Initializable
     //Ships Amount Texts + chosenShipTypeText
 
     @FXML
-    private Text singleMasterShipsAmountText, twoMasterShipsAmountText, threeMasterShipsAmountText, fourMasterShipsAmountText, chosenShipTypeText, instructionText;
+    private Text singleMasterShipsAmountText, twoMasterShipsAmountText, threeMasterShipsAmountText, fourMasterShipsAmountText, chosenShipTypeText, instructionText, usersInformation;
 
     //player and enemy fields
     @FXML
@@ -255,6 +255,11 @@ public class ClientWindowController implements Initializable
         {
             game.setGameState(Game.GameState.WAITING_FOR_SERVER);
             game.getPlayerBoard().changeAllProhibitedCellsToBlank();
+            setupButton.setDisable(true);
+            usersInformation.setText("Szukanie wroga");
+            instructionText.setText("Szukanie wroga");
+            verticallyOption.setDisable(true);
+            horizontallyOption.setDisable(true);
             updatePlayerGrid();
             client.setController(this);
             client.sendMessage("READY");
@@ -301,19 +306,21 @@ public class ClientWindowController implements Initializable
     public void shootMsgHandle(int x, int y)
     {
         int msg_code = game.getPlayerBoard().hit(x, y);
-        lastX = x;
-        lastY = y;
 
         if(game.getPlayerBoard().allShipsAreSunk())
         {
             client.sendMessage("WINNER");
-            game.setGameState(Game.GameState.WIN);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Przegrana");
-            alert.setHeaderText("Przegrales rozgrywke!");
-
             client.stopToListen();
-            Platform.exit();
+            game.setGameState(Game.GameState.LOSE);
+
+            Platform.runLater(()->{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Przegrana");
+                alert.setHeaderText("Przegrales rozgrywke!");
+                alert.showAndWait();
+
+                Platform.exit();});
+
         }
         else
         {
@@ -322,8 +329,8 @@ public class ClientWindowController implements Initializable
             switch (msg_code)
             {
                 case 0 -> client.sendMessage("MISSED");
-                case 1 -> client.sendMessage("SANK");
-                case 2 -> client.sendMessage("HIT");
+                case 1 -> client.sendMessage("HIT");
+                case 2 -> client.sendMessage("SANK " + game.getPlayerBoard().getShipInformation(x, y));
             }
             //zmiana na stanu gry na czekanie na serwer
             //wysylka info
@@ -341,6 +348,8 @@ public class ClientWindowController implements Initializable
     {
         game.setGameState(Game.GameState.PLAYER_MOVE);
         instructionText.setText("Twoj ruch");
+        usersInformation.setText("Gra z wrogiem");
+
         /*
         * wysylka wiadomosci bedzie w odpowiednim buttonAction
         * */
@@ -353,26 +362,39 @@ public class ClientWindowController implements Initializable
         client.sendMessage("YOUR TURN");
         Platform.runLater(() -> {
             instructionText.setText("Ruch przeciwnika");
+            usersInformation.setText("Gra z wrogiem");
             updateEnemyGrid();
         });
     }
 
     public void winnerMsgHandle()
     {
-        game.setGameState(Game.GameState.WIN);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Wygrana");
-        alert.setHeaderText("Wygrałeś rozgrywkę");
+        if(game.getGameState() == Game.GameState.LOSE)
+            return;
 
+        game.setGameState(Game.GameState.WIN);
         client.stopToListen();
-        Platform.exit();
+
+        Platform.runLater(() -> {Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Wygrana");
+            alert.setHeaderText("Wygrałeś rozgrywkę"); alert.showAndWait(); Platform.exit();});
     }
 
-    public void sankHitMsgHandle()
+    public void hitMsgHandle()
     {
         game.getEnemyBoard().setBoardCellState(lastX, lastY, EnumCellStates.SHOT);
         game.setGameState(Game.GameState.PLAYER_MOVE);
         Platform.runLater(()->{instructionText.setText("Twoj ruch");
+            usersInformation.setText("Gra z wrogiem");
+            updateEnemyGrid();});
+    }
+
+    public void sankMsgHandle(int x, int y, boolean isVertical, int length)
+    {
+        game.getEnemyBoard().sinkShip(x, y, isVertical, length);
+        game.setGameState(Game.GameState.PLAYER_MOVE);
+        Platform.runLater(()->{instructionText.setText("Twoj ruch");
+            usersInformation.setText("Gra z wrogiem");
             updateEnemyGrid();});
     }
 }

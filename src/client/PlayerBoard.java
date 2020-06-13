@@ -1,5 +1,7 @@
 package client;
 
+import com.sun.javafx.image.IntPixelGetter;
+
 import java.util.ArrayList;
 
 public class PlayerBoard extends Board {
@@ -143,6 +145,19 @@ public class PlayerBoard extends Board {
     {
         return board[x][y].getState();
     }
+
+    public String getShipInformation(int x, int y)
+    {
+            Ship ship = board[x][y].getAlignedShip();
+            x = ship.getBeginning().getX();
+            y = ship.getBeginning().getY();
+            int isV = ship.isVertical() ? 1 : 0;
+            int length = ship.getLength();
+            int msgCode = 10000;
+            msgCode += x * 1000 + y * 100 + isV * 10 + length;
+            return Integer.toString(msgCode);
+    }
+
     public PlayerBoard()
     {
         super();
