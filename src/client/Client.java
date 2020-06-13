@@ -67,8 +67,6 @@ public class Client {
                     }
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 try {
                     socket.close();
@@ -76,6 +74,7 @@ public class Client {
                     System.out.println(e.getMessage());
                 }
             }
+
         });
     }
 

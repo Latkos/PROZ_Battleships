@@ -35,6 +35,8 @@ public class ClientWindowController implements Initializable {
     @FXML
     private Text singleMasterShipsAmountText, twoMasterShipsAmountText, threeMasterShipsAmountText, fourMasterShipsAmountText, chosenShipTypeText, instructionText, usersInformation;
 
+    @FXML
+    private Text enemySingleMasterShipsAmountText, enemyTwoMasterShipsAmountText, enemyThreeMasterShipsAmountText, enemyFourMasterShipsAmountText;
     //player and enemy fields
     @FXML
     private Pane field_pA1, field_pA2, field_pA3, field_pA4, field_pA5, field_pA6, field_pA7, field_pA8, field_pA9, field_pA10,
@@ -98,6 +100,82 @@ public class ClientWindowController implements Initializable {
                 }
     }
 
+    private void updatePlayerShipsAmountInformation()
+    {
+        switch (game.getPlayerBoard().getAmountShipsOfType(0))
+        {
+            case 0 -> singleMasterShipsAmountText.setText("0/4");
+            case 1 -> singleMasterShipsAmountText.setText("1/4");
+            case 2 -> singleMasterShipsAmountText.setText("2/4");
+            case 3 -> singleMasterShipsAmountText.setText("3/4");
+            case 4 -> {
+                singleMasterShipsAmountText.setText("4/4");
+                singleMastedChoiceButton.setDisable(true);
+            }
+        }
+
+        switch (game.getPlayerBoard().getAmountShipsOfType(1)) {
+            case 0 -> twoMasterShipsAmountText.setText("0/3");
+            case 1 -> twoMasterShipsAmountText.setText("1/3");
+            case 2 -> twoMasterShipsAmountText.setText("2/3");
+            case 3 -> {
+                twoMasterShipsAmountText.setText("3/3");
+                twoMasterChoiceButton.setDisable(true);
+            }
+        }
+
+        switch (game.getPlayerBoard().getAmountShipsOfType(2)) {
+            case 0 -> threeMasterShipsAmountText.setText("0/2");
+            case 1 -> threeMasterShipsAmountText.setText("1/2");
+            case 2 -> {
+                threeMasterShipsAmountText.setText("2/2");
+                threeMasterChoiceButton.setDisable(true);
+            }
+        }
+
+        switch (game.getPlayerBoard().getAmountShipsOfType(3))
+        {
+            case 0 -> fourMasterShipsAmountText.setText("0/1");
+            case 1 -> {
+                fourMasterShipsAmountText.setText("1/1");
+                fourMasterChoiceButton.setDisable(true);}
+        }
+    }
+
+    private void updateEnemyShipsAmountInformation()
+    {
+        switch (game.getEnemyBoard().getAmountShipsOfType(0))
+        {
+            case 0 -> enemySingleMasterShipsAmountText.setText("0/4");
+            case 1 -> enemySingleMasterShipsAmountText.setText("1/4");
+            case 2 -> enemySingleMasterShipsAmountText.setText("2/4");
+            case 3 -> enemySingleMasterShipsAmountText.setText("3/4");
+            case 4 -> enemySingleMasterShipsAmountText.setText("4/4");
+        }
+
+        switch (game.getEnemyBoard().getAmountShipsOfType(1)) {
+            case 0 -> enemyTwoMasterShipsAmountText.setText("0/3");
+            case 1 -> enemyTwoMasterShipsAmountText.setText("1/3");
+            case 2 -> enemyTwoMasterShipsAmountText.setText("2/3");
+            case 3 -> {
+                enemyTwoMasterShipsAmountText.setText("3/3");
+            }
+        }
+
+        switch (game.getEnemyBoard().getAmountShipsOfType(2)) {
+            case 0 -> enemyThreeMasterShipsAmountText.setText("0/2");
+            case 1 -> enemyThreeMasterShipsAmountText.setText("1/2");
+            case 2 -> enemyThreeMasterShipsAmountText.setText("2/2");
+
+        }
+
+        switch (game.getEnemyBoard().getAmountShipsOfType(3))
+        {
+            case 0 -> enemyFourMasterShipsAmountText.setText("0/1");
+            case 1 -> enemyFourMasterShipsAmountText.setText("1/1");
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerFields = new Pane[][]{{field_pA1, field_pA2, field_pA3, field_pA4, field_pA5, field_pA6, field_pA7, field_pA8, field_pA9, field_pA10},
@@ -143,15 +221,7 @@ public class ClientWindowController implements Initializable {
                     int column = GridPane.getColumnIndex(source);
 
                     if (game.getPlayerBoard().placeShip(1, column, row - 1, true)) {
-                        switch (game.getPlayerBoard().getAmountShipsOfType(0)) {
-                            case 1 -> singleMasterShipsAmountText.setText("1/4");
-                            case 2 -> singleMasterShipsAmountText.setText("2/4");
-                            case 3 -> singleMasterShipsAmountText.setText("3/4");
-                            case 4 -> {
-                                singleMasterShipsAmountText.setText("4/4");
-                                singleMastedChoiceButton.setDisable(true);
-                            }
-                        }
+                        updatePlayerShipsAmountInformation();
                         updatePlayerGrid();
                     }
                 } else if (chosenShip == ChosenShip.twoMaster) {
@@ -160,33 +230,18 @@ public class ClientWindowController implements Initializable {
 
                     if (game.getPlayerBoard().placeShip(2, column, row - 1, (PositionRadioButtons.getSelectedToggle() == verticallyOption))) {
                         updatePlayerGrid();
-
-                        //updateInformation and disableButton
-                        switch (game.getPlayerBoard().getAmountShipsOfType(1)) {
-                            case 1 -> twoMasterShipsAmountText.setText("1/3");
-                            case 2 -> twoMasterShipsAmountText.setText("2/3");
-                            case 3 -> {
-                                twoMasterShipsAmountText.setText("3/3");
-                                twoMasterChoiceButton.setDisable(true);
-                            }
+                        updatePlayerShipsAmountInformation();
                         }
-                    }
+                }
 
-                } else if (chosenShip == ChosenShip.threeMaster) //#426127
+                else if (chosenShip == ChosenShip.threeMaster) //#426127
                 {
                     int row = GridPane.getRowIndex(source);
                     int column = GridPane.getColumnIndex(source);
 
                     if (game.getPlayerBoard().placeShip(3, column, row - 1, (PositionRadioButtons.getSelectedToggle() == verticallyOption))) {
                         updatePlayerGrid();
-
-                        switch (game.getPlayerBoard().getAmountShipsOfType(2)) {
-                            case 1 -> threeMasterShipsAmountText.setText("1/2");
-                            case 2 -> {
-                                threeMasterShipsAmountText.setText("2/2");
-                                threeMasterChoiceButton.setDisable(true);
-                            }
-                        }
+                        updatePlayerShipsAmountInformation();
                     }
                 } else if (chosenShip == ChosenShip.fourMaster) {
                     int row = GridPane.getRowIndex(source);
@@ -194,9 +249,7 @@ public class ClientWindowController implements Initializable {
 
                     if (game.getPlayerBoard().placeShip(4, column, row - 1, (PositionRadioButtons.getSelectedToggle() == verticallyOption))) {
                         updatePlayerGrid();
-
-                        fourMasterShipsAmountText.setText("1/1");
-                        fourMasterChoiceButton.setDisable(true);
+                        updatePlayerShipsAmountInformation();
                     }
                 }
                 if (game.getPlayerBoard().getAmountShipsOfType(0) == 4 && game.getPlayerBoard().getAmountShipsOfType(1) == 3 && game.getPlayerBoard().getAmountShipsOfType(2) == 2 && game.getPlayerBoard().getAmountShipsOfType(3) == 1)
@@ -295,6 +348,8 @@ public class ClientWindowController implements Initializable {
             //wysylka info
 
             Platform.runLater(() -> {
+                updatePlayerShipsAmountInformation();
+                updateEnemyShipsAmountInformation();
                 instructionText.setText("Ruch wroga");
                 updatePlayerGrid();
             });
@@ -314,6 +369,7 @@ public class ClientWindowController implements Initializable {
         client.sendMessage("YOUR TURN");
         Platform.runLater(() -> {
             instructionText.setText("Ruch przeciwnika");
+            updateEnemyShipsAmountInformation();
             updateEnemyGrid();
         });
     }
@@ -340,6 +396,7 @@ public class ClientWindowController implements Initializable {
         game.setGameState(Game.GameState.PLAYER_MOVE);
         Platform.runLater(() -> {
             instructionText.setText("Twoj ruch");
+            updateEnemyShipsAmountInformation();
             updateEnemyGrid();
         });
     }
@@ -349,6 +406,7 @@ public class ClientWindowController implements Initializable {
         game.setGameState(Game.GameState.PLAYER_MOVE);
         Platform.runLater(() -> {
             instructionText.setText("Twoj ruch");
+            updateEnemyShipsAmountInformation();
             updateEnemyGrid();
         });
     }
@@ -356,7 +414,8 @@ public class ClientWindowController implements Initializable {
     public void usrMsgHandle(String msg) {
         game.setGameState(Game.GameState.ENEMY_MOVE);
         Platform.runLater(() -> {
-            instructionText.setText("Ruch przeciwinika");
+            instructionText.setText("Ruch przeciwnika");
+            updateEnemyShipsAmountInformation();
             usersInformation.setText("Ty vs " + msg);
         });
     }

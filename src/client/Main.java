@@ -1,9 +1,11 @@
 package client;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 
@@ -21,20 +23,31 @@ public class Main extends Application
         try {
             client = new Client("localhost");
         } catch (Exception e) {
-            e.printStackTrace();
+            client = null;
         }
     }
     @Override
     public void start(Stage stage) throws Exception
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginWindow.fxml"));
-        Parent root = loader.load();
-        LoginWindowController loginWindowController = loader.getController();
-        loginWindowController.setClient(client);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Battleships - logowanie");
-        stage.show();
+        if(client == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Błąd przy nawiązywaniu połączenia");
+            alert.setContentText("Nie odnaleziono serwera");
+            alert.showAndWait();
+            Platform.exit();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("loginWindow.fxml"));
+            Parent root = loader.load();
+            LoginWindowController loginWindowController = loader.getController();
+            loginWindowController.setClient(client);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Battleships - logowanie");
+            stage.show();
+        }
     }
 
     public void stop()
@@ -47,6 +60,7 @@ public class Main extends Application
             {
                 client.sendMessage("LEFT");
             }
+            System.exit(0);
         }
 
     }

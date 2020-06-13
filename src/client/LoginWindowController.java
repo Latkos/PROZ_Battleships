@@ -1,5 +1,6 @@
 package client;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,9 +21,6 @@ public class LoginWindowController implements Initializable
 {
     @FXML
     private Button loginButton;
-
-    @FXML
-    private Button cancelButton;
 
     @FXML
     private TextField nickField;
@@ -60,6 +58,7 @@ public class LoginWindowController implements Initializable
 
                 stage.setTitle("Battleships");
                 stage.setScene(new Scene(root));
+
             }
 
             else
@@ -71,10 +70,5 @@ public class LoginWindowController implements Initializable
                 alert.showAndWait();
             }
         }
-        else if(mouseEvent.getSource() == cancelButton)
-        {
-            //the same jak wyzej ale dla cancelBUtton
-        }
-
     }
 }
