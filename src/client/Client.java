@@ -66,8 +66,16 @@ public class Client {
 
                                 controller.missedMsgHandle();
                             }
-                            if (response.startsWith("HIT") || response.startsWith("SANK")) {
-                                controller.sankHitMsgHandle(); //doda sie nowy kod msg do obslugi sank cos w stylu -> SANK XY isVertical Length
+                            if (response.startsWith("HIT")) {
+                                controller.hitMsgHandle(); //doda sie nowy kod msg do obslugi sank cos w stylu -> SANK XY isVertical Length
+                            }
+                            if(response.startsWith("SANK"))
+                            {
+                                int x = Character.getNumericValue(response.charAt(6));
+                                int y = Character.getNumericValue(response.charAt(7));
+                                boolean isV = (Character.getNumericValue(response.charAt(8)) == 1);
+                                int length = Character.getNumericValue(response.charAt(9));
+                                controller.sankMsgHandle(x, y, isV, length);
                             }
                             if (response.startsWith("LEFT")) {
                                 controller.winnerMsgHandle();
@@ -106,6 +114,7 @@ public class Client {
     }
 
     public void sendMessage(String msg) {
+        System.out.println("S: " + msg);
         out.println(msg);
     }
 

@@ -43,6 +43,11 @@ public class Ship {
         this.beginning = beginning;
     }
 
+    public Cell getBeginning()
+    {
+        return beginning;
+    }
+
     public Ship(int length) {
         this.length=length;
         this.isVertical=true;

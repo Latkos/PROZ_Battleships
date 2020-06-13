@@ -20,7 +20,7 @@
             <Pane layoutY="150.0" prefHeight="116.0" prefWidth="200.0" style="-fx-background-color: #142850;">
                <children>
                   <Button fx:id="setupButton" disable="true" layoutX="11.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#choiceButtonsAction" prefHeight="25.0" prefWidth="176.0" text="Zatwierdź ustawienie" />
-                  <Text fill="#dae1e7" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ty vs Wróg" textAlignment="CENTER" wrappingWidth="200.0">
+                  <Text fx:id="usersInformation" fill="#dae1e7" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ty vs Wróg" textAlignment="CENTER" wrappingWidth="200.0">
                      <font>
                         <Font size="21.0" />
                      </font>
