@@ -1,0 +1,15 @@
+Client\Game$GameState.class
+Client\SuperMain.class
+Client\ClientWindowController$1.class
+Client\Ship.class
+Client\ClientWindowController.class
+Client\Board.class
+Client\Cell.class
+Client\Client.class
+Client\LoginWindowController.class
+Client\Game.class
+Client\ClientWindowController$ChosenShip.class
+Client\EnemyBoard.class
+Client\PlayerBoard.class
+Client\EnumCellStates.class
+Client\Main.class
